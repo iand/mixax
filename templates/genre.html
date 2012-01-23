@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+      {% for playlist in recent_playlists %}
+        {% include "playlist-item.html" %}
+      {% endfor %}
+{% endblock %}

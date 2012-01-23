@@ -1,0 +1,18 @@
+<div class="row playlistrow">
+  <div class="one column alpha">
+    <img src="http://graph.facebook.com/{{playlist.userid}}/picture?type=square">
+  </div>
+  <div class="eleven columns omega">
+    <div class="title"><a href="/playlist/{{playlist.id}}/">{{playlist.title|truncate(40)}}</a></div>
+
+    <div class="meta">
+    score: {{playlist.score}} <img src="/static/images/thumbs_up.gif"/>
+    {% if playlist.genre is not none %}
+    &middot; genre: <a href="/genre/{{playlist.genre.name}}/">{{playlist.genre.textual_name}}</a>
+    {% endif %}
+    {% if playlist.parent != 0 %}
+    &middot; parent: <a href="/playlist/{{playlist.parent_playlist.id}}/">{{playlist.parent_playlist.title|truncate(20)}}</a>
+    {% endif %}
+    </div>
+  </div>
+</div>

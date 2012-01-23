@@ -1,0 +1,19 @@
+Redis Schema
+------------
+global:nextPlaylistID => INTEGER
+global:recentPlaylists => SORTEDSET (score is timestamp, value is playlist id)
+global:genres => SORTEDSET of genre names
+
+genre:electronic:textualName => "Electronic"
+genre:electronic:playlists => SET of playlist ids
+
+playlist:1234:userid => STRING
+playlist:1234:title => STRING
+playlist:1234:entries => STRING
+	track1|artist1|track2|artist2...
+playlist:1234:parent => INTEGER
+playlist:1234:genre => STRING
+playlist:1234:thumbsUp => SET of user ids
+playlist:1234:thumbsDown => SET of user ids
+playlist:1234:score => INTEGER
+	= len(thumbsUp) - len(thumbsDown)

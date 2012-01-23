@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+  <p>Create a playlist
+  {% if parent.id is defined %}
+  remixing <strong>{{parent.title}}</strong>
+  {% endif %}
+  </p>
+  <form action="" method="post">
+    <input type="hidden" name="parent" value="{{parent.id}}"/>
+
+    <label for="title">Playlist title: <input type="text" class="title" id="title" name="title" size="50"/></label>
+    
+    <label for="genre">Genre:</label>
+    <select name="genre" id="genre">
+      <option value="">--- Choose ---</option>
+      {% for genre in genres %}
+        <option value="{{genre.name}}"
+          {% if parent.id is defined %}{% if parent.genre_name == genre.name %} selected="1" {% endif %}{% endif %}
+        >{{genre.textual_name}}</option>
+      {% endfor %}
+    </select>
+    &nbsp;&nbsp;&nbsp;<label for="track1" class="track">Track</label>
+    &nbsp;&nbsp;&nbsp;<label for="artist1" class="artist">Artist</label>
+    <br>
+
+          1. <input type="text" id="track1" name="track1" class="track half-bottom" value="{{get_entry_part(parent, 0, 0)}}"/>
+          by <input type="text" id="artist1" name="artist1" class="artist half-bottom" value="{{get_entry_part(parent, 0, 1)}}"/>
+          <br>
+
+
+          2. <input type="text" id="track2" name="track2" class="track half-bottom" value="{{get_entry_part(parent, 1, 0)}}"/>
+          by <input type="text" id="artist2" name="artist2" class="artist half-bottom" value="{{get_entry_part(parent, 1, 1)}}"/>
+          <br>
+
+          3. <input type="text" id="track3" name="track3" class="track half-bottom" value="{{get_entry_part(parent, 2, 0)}}"/>
+          by <input type="text" id="artist3" name="artist3" class="artist half-bottom" value="{{get_entry_part(parent, 2, 1)}}"/>
+          <br>
+
+          4. <input type="text" id="track4" name="track4" class="track half-bottom" value="{{get_entry_part(parent, 3, 0)}}"/>
+          by <input type="text" id="artist4" name="artist4" class="artist half-bottom" value="{{get_entry_part(parent, 3, 1)}}"/>
+          <br>
+
+
+          5. <input type="text" id="track5" name="track5" class="track half-bottom" value="{{get_entry_part(parent, 4, 0)}}"/>
+          by <input type="text" id="artist5" name="artist5" class="artist half-bottom" value="{{get_entry_part(parent, 4, 1)}}"/>
+          <br>
+
+          6. <input type="text" id="track6" name="track6" class="track half-bottom" value="{{get_entry_part(parent, 5, 0)}}"/>
+          by <input type="text" id="artist6" name="artist6" class="artist half-bottom" value="{{get_entry_part(parent, 5, 1)}}"/>
+          <br>
+
+          7.
+          <input type="text" id="track7" name="track7" class="track half-bottom" value="{{get_entry_part(parent, 6, 0)}}"/>
+          by
+          <input type="text" id="artist7" name="artist7" class="artist half-bottom" value="{{get_entry_part(parent, 6, 1)}}"/>
+
+
+    <input type="submit" value="Create"/> or <a href="/">cancel</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+  {% block meta %}
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- These are Open Graph tags.  They add meta data to your  -->
+  <!-- site that facebook uses when your content is shared     -->
+  <!-- over facebook.  You should fill these tags in with      -->
+  <!-- your data.  To learn more about Open Graph, visit       -->
+  <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
+  <meta content="{{playlist.title}}" property="og:title" />
+  <meta content="" property="og:type" />
+  <meta content="http://mixax.com/playlist/{{playlist.id}}/" property="og:url" />
+  {% endblock %}
+{% block content %}
+      <div itemscope itemtype="http://schema.org/MusicPlaylist">
+      <h1><span class="author"><img src="http://graph.facebook.com/{{playlist.userid}}/picture"></span> <span itemprop="name">{{playlist.title}}</span></h1>
+      <ol class="square">{% for entry in playlist.entries %}
+        {% if entry[0] is not none %}
+        <li itemprop="tracks" itemscope itemtype="http://schema.org/MusicRecording"><strong itemprop="name">{{entry[0]}}</strong> by <span itemprop="byArtist">{{entry[1]}}</span></li>
+        {% endif %}
+        {% endfor %}
+      </ol>
+      </div>
+
+<iframe src="http://www.facebook.com/plugins/like.php?href=http://mixax.com/playlist/{{playlist.id}}/"
+        scrolling="no" frameborder="0"
+        style="border:none; width:450px; height:80px"></iframe>
+{% endblock %}
+{% block sidebar %}
+      <p style="text-align: center"><a href="/create/{{playlist.id}}/"><img src="/static/images/remix.png" width="128" height="50" alt="remix now"></a></p>
+
+{% endblock %}
+

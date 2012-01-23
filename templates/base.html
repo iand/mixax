@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+  <!-- Basic Page Needs
+  ================================================== -->
+  <meta charset="utf-8">
+  <title>Mixax</title>
+  {% block meta %}
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- These are Open Graph tags.  They add meta data to your  -->
+  <!-- site that facebook uses when your content is shared     -->
+  <!-- over facebook.  You should fill these tags in with      -->
+  <!-- your data.  To learn more about Open Graph, visit       -->
+  <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
+  <meta content="" property="og:title" />
+  <meta content="" property="og:type" />
+  <meta content="" property="og:url" />
+  <meta content="" property="og:image" />
+  {% endblock %}
+  <meta content="Mixax" property="og:site_name" />
+  <meta content="{{appId}}" property="fb:app_id" />
+  <script type="text/javascript">function popup(pageURL, title,w,h) { var left = (screen.width/2)-(w/2); var top = (screen.height/2)-(h/2); var targetWin = window.open( pageURL, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left ); }</script>
+  <!--[if IE]>
+    <script>
+      var tags = ['header', 'section'];
+      while(tags.length)
+        document.createElement(tags.pop());
+    </script>
+  <![endif]-->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- CSS
+  ================================================== -->
+  <link rel="stylesheet" href="/static/base.css">
+  <link rel="stylesheet" href="/static/skeleton.css">
+  <link rel="stylesheet" href="/static/layout.css">
+  <link rel="stylesheet" href="/static/extra.css">
+
+  <!-- Favicons
+  ================================================== -->
+  <link rel="shortcut icon" href="/static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="/static/images/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/static/images/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/static/images/apple-touch-icon-114x114.png">
+
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '{{appId}}',
+        status     : true, 
+        cookie     : true,
+        xfbml      : true,
+        oauth      : true,
+      });
+    FB.Event.subscribe('auth.login', function(response) {
+      top.location.href = 'http://mixax.com/';
+    });
+    // redirect user on logout.
+    FB.Event.subscribe('auth.logout', function(response) {
+      top.location.href = "http://mixax.com/";
+    });
+
+    };
+    (function(d){
+       var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+       js = d.createElement('script'); js.id = id; js.async = true;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       d.getElementsByTagName('head')[0].appendChild(js);
+     }(document));
+  </script>
+</head>
+<body>
+
+
+
+  <!-- Primary Page Layout
+  ================================================== -->
+
+  <!-- Delete everything in this .container and get started on your own site! -->
+
+  <div class="container">
+    <div class="sixteen columns">
+    <div class="row header" >
+
+    <div class="twelve columns alpha">
+      <div>
+        <strong><a href="/">Mixax</a></strong>
+        &middot; <a href="/recent/">recent</a>
+        &middot; <a href="/create/">create</a>
+        &middot; <a href="/about/">about</a>
+      </div>
+
+    </div>
+
+    <div class="four columns omega" style="text-align:right">
+      <fb:login-button autologoutlink='true'></fb:login-button>
+    </div>
+  </div>
+  </div>
+    <div class="twelve columns">
+      {% for category, msg in get_flashed_messages(with_categories=true) %}
+        <p class="flash flash-{{category}}">{{msg}}</p>
+      {% endfor %}
+
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div class="four columns">
+      {% block sidebar %}
+      @@SIDEBAR
+      {% endblock %}
+    </div>
+
+  </div><!-- container -->
+
+
+
+  <div id="fb-root"></div>
+  <!-- JS
+  ================================================== -->
+  <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+  <script src="/static/javascripts/tabs.js"></script>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>

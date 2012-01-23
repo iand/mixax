@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+      {% for playlist in recent_playlists %}
+        {% include "playlist-item.html" %}
+      {% endfor %}
+{% endblock %}
+{% block sidebar %}
+      {% if me is not none %}
+      <h4>Friends on Mixax</h4>
+      <p>
+      {% for friend in app_friends %}
+        <a href="#" onclick="window.open('http://www.facebook.com/{{friend.uid}}')"><img src="https://graph.facebook.com/{{friend.uid}}/picture?type=square" alt="{{friend.name}}"></a>
+      {% endfor %}
+      {% endif %}
+      </p>
+{% endblock %}
